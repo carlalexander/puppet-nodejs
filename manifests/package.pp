@@ -14,10 +14,22 @@
 #
 # This class file is not called directly
 class nodejs::package {
-  package { 'nodejs':
+  Exec {
+    path => '/bin:/sbin:/usr/bin:/usr/sbin'
+  }
+
+  package { 'software-properties-common':
     ensure => latest,
   }
-  package { 'npm':
-    ensure => latest,
+
+  exec { 'add-nodejs-repo':
+    command => 'add-apt-repository -y ppa:chris-lea/node.js && apt-get update',
+    unless  => 'apt-cache policy | grep chris-lea/node.js',
+    require => Package['software-properties-common']
+  }
+
+  package { 'nodejs':
+    ensure  => latest,
+    require => 'add-nodejs-repo'
   }
 }
