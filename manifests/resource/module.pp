@@ -23,7 +23,7 @@ define nodejs::resource::module (
   }
 
   exec { "nodejs-install-${module}-module":
-    command => "npm install ${module}",
+    command => "npm install ${module} -g",
     unless  => "npm list | grep ${module}"
   }
 
