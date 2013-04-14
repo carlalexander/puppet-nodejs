@@ -18,7 +18,7 @@ define nodejs::resource::module (
   $autoupdate = true
 ) {
   Exec {
-    path => '/bin:/sbin:/usr/bin:/usr/sbin'
+    path => '/bin:/sbin:/usr/bin:/usr/sbin',
     require => Package['nodejs']
   }
 
