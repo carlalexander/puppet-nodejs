@@ -18,13 +18,13 @@ define nodejs::resource::module (
   $autoupdate = true
 ) {
   Exec {
-    path    => '/bin:/sbin:/usr/bin:/usr/sbin',
-    require => Package['npm']
+    path => '/bin:/sbin:/usr/bin:/usr/sbin'
+    require => Package['nodejs']
   }
 
   exec { "nodejs-install-${module}-module":
     command => "npm install ${module} -g",
-    unless  => "npm list | grep ${module}"
+    unless  => "npm ls -g | grep ${module}"
   }
 
   if ($autoupdate) {

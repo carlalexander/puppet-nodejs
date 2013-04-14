@@ -30,6 +30,6 @@ class nodejs::package {
 
   package { 'nodejs':
     ensure  => latest,
-    require => 'add-nodejs-repo'
+    require => Exec['add-nodejs-repo']
   }
 }
