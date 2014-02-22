@@ -29,7 +29,7 @@ define nodejs::resource::module (
 
   if ($autoupdate) {
     exec { "nodejs-update-${module}-module":
-      command => "npm update ${module}",
+      command => "npm update ${module} -g",
       require => Exec["nodejs-install-${module}-module"]
     }
   }
